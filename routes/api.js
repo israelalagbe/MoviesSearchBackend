@@ -4,8 +4,9 @@ const router = express.Router();
 // const { Role } = require('../middlewares/role_middleware');
 
 
-// const { updateLocation,getAvailableDrivers } = require('../controllers/driver_controller');
-// router.get('/drivers/available', getAvailableDrivers);
+const { getMovies } = require('../controllers/MovieController');
+
+router.get('/movies', getMovies);
 // router.put('/driver/location', Role('driver'), updateLocation);
 
 module.exports = router;
