@@ -1,5 +1,6 @@
 const express = require('express');
 const Movie = require('../models/Movie');
+
 /**
  * @param {Request} req
  * @param {Response} res
@@ -19,7 +20,13 @@ exports.getMovies = async (req, res, next) => {
   try {
 
     const query = Movie.find(
-      search?  {   $or:[ { genres: new RegExp(search) } ]  }:{}
+      search?  {
+        $or:[
+          { title: new RegExp(search) },
+          { genres: new RegExp(search) },
+          { cast: new RegExp(search) }
+        ]
+      }:{}
     );
 
     query.skip(startAt)
