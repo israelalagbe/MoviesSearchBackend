@@ -41,9 +41,11 @@ exports.getMovies = async (req, res, next) => {
       .sort(`${sortType==='desc'?'-':''}${sortField}`);
 
     const movies = await query;
+    const totalMovies = await Movie.count();
 
     return res.status(200).json({
-      movies
+      movies,
+      total: totalMovies
     });
 
   } catch (error) {
