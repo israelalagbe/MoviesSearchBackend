@@ -17,16 +17,24 @@ exports.getMovies = async (req, res, next) => {
 
   const search = req.query.search||'';
 
+  const year= Number(req.query.year);
+
   try {
 
     const query = Movie.find(
-      search?  {
-        $or:[
-          { title: new RegExp(search) },
-          { genres: new RegExp(search) },
-          { cast: new RegExp(search) }
-        ]
-      }:{}
+      {
+        ...( year?{ year }:{} ),
+
+        ...(
+          search ? {
+            $or:[
+              { title: new RegExp(search) },
+              { genres: new RegExp(search) },
+              { cast: new RegExp(search) }
+            ]
+          }:{}
+        )
+      }
     );
 
     query.skip(startAt)
