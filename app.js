@@ -21,12 +21,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
-function errorHandler(err, req, res, next) {
+app.use((err, req, res, next) =>{
   if (res.headersSent) {
     return next(err);
   }
   res.status(500).send({ debug: err && err.message, error: 'Something went wrong!, we are not quite sure what it is' });
-}
-app.use(errorHandler);
+});
 
 module.exports = app;
