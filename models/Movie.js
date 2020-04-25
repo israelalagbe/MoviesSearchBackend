@@ -1,22 +1,12 @@
 const mongoose = require('mongoose');
 
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const String = mongoose.Schema.Types.String;
+const Number = mongoose.Schema.Types.Number;
 const MovieSchema = new mongoose.Schema({
-  // email: {
-  //     type: String,
-  //     lowercase: true,
-  //     unique: true,
-  //     required: true
-  // },
-  // name:  {
-  //     type: String,
-  //     unique: true,
-  //     required: true
-  // },
-  // user:{
-  //     type:ObjectId,
-  //     ref:'User'
-  // }
+  title: String,
+  year:  Number,
+  cast: [String],
+  genres: [String]
 }, {
   // timestamps: true
 });
