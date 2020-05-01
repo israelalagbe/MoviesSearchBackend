@@ -6,7 +6,11 @@ const MovieSchema = new mongoose.Schema({
   title: String,
   year:  Number,
   cast: [String],
-  genres: [String]
+  genres: [String],
+  comments:{
+    type: [String],
+    default: []
+  }
 }, {
   // timestamps: true
 });

@@ -68,6 +68,35 @@ exports.getMovieCompletions = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Function} next
+ */
+exports.addCommentToMovie = async (req, res, next) => {
+  const movieId = req.params.id;
+  const comment = req.body.comment;
+
+  if (!comment) {
+    return res.status(400).json({
+      error: 'Comment is required!'
+    });
+  }
+
+  try {
+
+    const movie = await Movie.findById(movieId);
+    movie.comments.push(comment);
+    await movie.save();
+
+    res.status(201).json(movie);
+
+
+  } catch (error) {
+    return next(error);
+  }
+};
+
 function getMovieQuery(year, search) {
   return Movie.find({
     ...(year ? {
